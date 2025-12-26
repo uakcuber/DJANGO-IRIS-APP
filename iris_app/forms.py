@@ -31,3 +31,9 @@ class IrisPlantForm(forms.ModelForm):
             'petal_length': forms.NumberInput(attrs={'class': 'form-control', 'step': '0.1'}),
             'petal_width': forms.NumberInput(attrs={'class': 'form-control', 'step': '0.1'}),
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Location alanı zorunlu
+        self.fields['location'].required = True
+        self.fields['location'].empty_label = "-- Konum Seçin --"
