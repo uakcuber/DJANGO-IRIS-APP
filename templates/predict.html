@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Yapay Zeka ile Tür Tahmini (ML Prediction)</h2>
+    <hr>
+    
+    <div style="display: flex; gap: 40px; flex-wrap: wrap;">
+        
+        <div style="flex: 1; min-width: 300px;">
+            <form method="post" style="background: #f9f9f9; padding: 20px; border-radius: 5px;">
+                {% csrf_token %}
+                
+                <label>Sepal Length (cm):</label>
+                <input type="number" step="0.1" name="sepal_length" required class="form-control" style="width: 100%; padding: 8px; margin-bottom: 10px;">
+                
+                <label>Sepal Width (cm):</label>
+                <input type="number" step="0.1" name="sepal_width" required class="form-control" style="width: 100%; padding: 8px; margin-bottom: 10px;">
+                
+                <label>Petal Length (cm):</label>
+                <input type="number" step="0.1" name="petal_length" required class="form-control" style="width: 100%; padding: 8px; margin-bottom: 10px;">
+                
+                <label>Petal Width (cm):</label>
+                <input type="number" step="0.1" name="petal_width" required class="form-control" style="width: 100%; padding: 8px; margin-bottom: 10px;">
+                
+                <label style="margin-top: 15px; display: block; font-weight: bold;">Algoritma Seç:</label>
+                <select name="algorithm" style="width: 100%; padding: 10px; margin-bottom: 20px;">
+                    <option value="knn">K-Nearest Neighbors (KNN)</option>
+                    <option value="dt">Decision Tree (Karar Ağacı)</option>
+                    <option value="lr">Logistic Regression</option>
+                </select>
+
+                <button type="submit" style="background: #673AB7; color: white; padding: 12px; width: 100%; border: none; cursor: pointer; font-size: 16px; border-radius: 4px;">
+                    Tahmin Et
+                </button>
+            </form>
+        </div>
+
+        <div style="flex: 1; min-width: 300px; display: flex; align-items: center; justify-content: center;">
+            {% if prediction %}
+                <div style="text-align: center; border: 2px solid #673AB7; padding: 30px; border-radius: 10px; background: #fff; width: 90%; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                    
+                    <h3 style="color: #555; margin-bottom: 5px;">Tahmin Sonucu:</h3>
+                    <h1 style="color: #673AB7; font-size: 42px; margin: 10px 0; text-transform: capitalize;">Iris-{{ prediction }}</h1>
+                    
+                    <div style="margin: 25px 0; text-align: left;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px;">
+                            <strong>Güven Oranı:</strong>
+                            <strong>%{{ confidence }}</strong>
+                        </div>
+                        
+                        <div style="background-color: #e0e0e0; border-radius: 10px; height: 18px; width: 100%; overflow: hidden;">
+                            <div style="width: {{ confidence }}%; height: 100%; transition: width 1s ease-in-out; background-color: {% if confidence > 80 %}#4CAF50{% elif confidence > 50 %}#FFC107{% else %}#F44336{% endif %};">
+                            </div>
+                        </div>
+                    </div>
+
+                    <p style="font-size: 0.9rem; color: #777; margin-top: 20px; border-top: 1px solid #eee; padding-top: 10px;">
+                        Kullanılan Algoritma: <br>
+                        <strong style="color: #333;">{{ selected_algo }}</strong>
+                    </p>
+                </div>
+            {% else %}
+                <div style="text-align: center; color: #aaa; padding: 20px;">
+                    <p style="font-size: 18px;">👈 Değerleri girip <strong>"Tahmin Et"</strong> butonuna basın.</p>
+                    <p style="font-size: 14px;">Sonuç ve yapay zekanın güven oranı burada görünecek.</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Silme İşlemini Onayla</h2>
+    <p>"{{ plant.species }}" ({{ plant.sepal_length }}, {{ plant.sepal_width }}) bitkisini silmek istediğinize emin misiniz?</p>
+    
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" style="background: red; color: white; padding: 10px; border: none; cursor: pointer;">Evet, Sil</button>
+        <a href="{% url 'plant_list' %}" style="margin-left: 10px;">İptal</a>
+    </form>
+{% endblock %}

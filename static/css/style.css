@@ -1,0 +1,88 @@
+/* static/style.css */
+
+/* 1. Özellik: Font ayarı */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f2f5; /* 2. Arkaplan rengi */
+    margin: 0;
+    padding: 0;
+    line-height: 1.6; /* 3. Satır yüksekliği */
+    color: #333; /* 4. Yazı rengi */
+}
+
+/* Header ve Navigasyon */
+header {
+    background-color: #2c3e50;
+    padding: 1rem 0; /* 5. Dolgu (Padding) */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* 6. Gölge */
+}
+
+nav {
+    display: flex; /* 7. Flexbox kullanımı */
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto; /* 8. Ortalama */
+    padding: 0 20px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none; /* 9. Altı çizgiyi kaldırma */
+    margin-right: 20px;
+    font-weight: 600; /* 10. Yazı kalınlığı */
+    transition: color 0.3s ease; /* 11. Geçiş efekti */
+}
+
+nav a:hover {
+    color: #3498db; /* 12. Hover rengi */
+}
+
+/* Genel Kapsayıcı */
+.container {
+    max-width: 1100px;
+    margin: 30px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 8px; /* 13. Kenar yuvarlama */
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+/* Tablo Tasarımı */
+table {
+    width: 100%;
+    border-collapse: collapse; /* 14. Kenarlık birleştirme */
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd; /* 15. Alt kenarlık */
+}
+
+th {
+    background-color: #f8f9fa;
+    color: #2c3e50;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Form Elemanları */
+input[type="text"], input[type="number"], select, input[type="password"], input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Butonlar */
+button, .btn {
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 4px;
+}

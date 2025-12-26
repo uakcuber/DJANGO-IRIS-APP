@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iris Plant System</title>
+    
+    {% load static %}
+    
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+
+    <style>
+        .messages { list-style: none; padding: 0; margin-bottom: 20px; }
+        .messages li { padding: 10px; border-radius: 5px; margin-bottom: 5px; }
+        .messages .success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .messages .error { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div>
+                <a href="{% url 'plant_list' %}">Ana Sayfa</a>
+                
+                {% if is_writer or user.is_superuser %}
+                    <a href="{% url 'plant_create' %}">Yeni Ekle</a>
+                    <a href="{% url 'data_import_export' %}">Import/Export</a>
+                {% endif %}
+
+                <a href="{% url 'plant_search' %}">Arama</a>
+                
+                <a href="{% url 'predict_species' %}">Yapay Zeka (ML)</a>
+                
+                <a href="/admin">Admin Paneli</a>
+            </div>
+
+            <div>
+                {% if user.is_authenticated %}
+                    <span style="color: #ccc; margin-right: 10px;">{{ user.username }}</span>
+                    <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn" style="background:none; border:none; color:red; cursor:pointer; font-weight:bold; font-size:16px;">Çıkış</button>
+                    </form>
+                {% else %}
+                    <a href="{% url 'login' %}">Giriş</a>
+                    <a href="{% url 'register' %}">Kayıt</a>
+                {% endif %}
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li class="{{ message.tags }}">
+                    {{ message }}
+                </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Iris Projesi</p>
+    </footer>
+
+</body>
+</html>

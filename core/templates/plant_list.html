@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Kayıtlı Iris Bitkileri</h1>
+    <hr>
+    
+    {% if plants %}
+        <table border="1" cellpadding="10" style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr style="background-color: #eee;">
+                    <th>Tür</th>
+                    <th>Sepal L.</th>
+                    <th>Sepal W.</th>
+                    <th>Petal L.</th>
+                    <th>Petal W.</th>
+                    <th>Lokasyon</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for plant in plants %}
+                <tr>
+                    <td>{{ plant.species }}</td>
+                    <td>{{ plant.sepal_length }}</td>
+                    <td>{{ plant.sepal_width }}</td>
+                    <td>{{ plant.petal_length }}</td>
+                    <td>{{ plant.petal_width }}</td>
+                    <td>
+                        {% if plant.location %}
+                            {{ plant.location.city }}
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Henüz kayıtlı bir bitki yok.</p>
+    {% endif %}
+
+{% endblock %}

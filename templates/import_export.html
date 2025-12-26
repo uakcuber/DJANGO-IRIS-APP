@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Veri İçe/Dışa Aktar (Import/Export)</h2>
+    <hr>
+    
+    <div style="display: flex; gap: 50px; margin-top: 30px;">
+        
+        <div style="border: 1px solid #ccc; padding: 20px; border-radius: 5px; width: 45%;">
+            <h3>Dışa Aktar (Export)</h3>
+            <p>Mevcut veritabanındaki tüm bitkileri CSV formatında indir.</p>
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit" name="export_data" style="background: #2196F3; color: white; padding: 10px 20px; border: none; cursor: pointer;">
+                    CSV Olarak İndir
+                </button>
+            </form>
+        </div>
+
+        <div style="border: 1px solid #ccc; padding: 20px; border-radius: 5px; width: 45%;">
+            <h3>İçe Aktar (Import)</h3>
+            <p>CSV dosyasından toplu veri yükle.</p>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="file" name="csv_file" required style="margin-bottom: 15px;">
+                <br>
+                <button type="submit" name="import_data" style="background: #4CAF50; color: white; padding: 10px 20px; border: none; cursor: pointer;">
+                    Verileri Yükle
+                </button>
+            </form>
+        </div>
+
+    </div>
+{% endblock %}

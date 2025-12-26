@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Giriş Yap</h2>
+    <hr>
+    <div style="max-width: 400px;">
+        <form method="post">
+            {% csrf_token %}
+            
+            <p>
+                <label>Kullanıcı Adı:</label><br>
+                {{ form.username }}
+            </p>
+            <p>
+                <label>Şifre:</label><br>
+                {{ form.password }}
+            </p>
+
+            <button type="submit" style="background: #333; color: white; padding: 10px; border: none; cursor: pointer;">Giriş Yap</button>
+        </form>
+        <p>Hesabın yok mu? <a href="{% url 'register' %}">Kayıt Ol</a></p>
+    </div>
+{% endblock %}

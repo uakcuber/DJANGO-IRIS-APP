@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <h2>Kayıtlı Iris Bitkileri</h2>
+    </div>
+    
+    {% if plants %}
+        <table>
+            <thead>
+                <tr> <th>Tür</th>
+                    <th>Sepal L.</th>
+                    <th>Sepal W.</th>
+                    <th>Petal L.</th>
+                    <th>Petal W.</th>
+                    <th>Lokasyon</th>
+                    
+                    {% if is_writer or user.is_superuser %}
+                        <th>İşlemler</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for plant in plants %}
+                <tr>
+                    <td>{{ plant.species|capfirst }}</td>
+                    <td>{{ plant.sepal_length }}</td>
+                    <td>{{ plant.sepal_width }}</td>
+                    <td>{{ plant.petal_length }}</td>
+                    <td>{{ plant.petal_width }}</td>
+                    <td>
+                        {% if plant.location %}
+                            {{ plant.location.city }}
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+                    
+                    {% if is_writer or user.is_superuser %}
+                        <td>
+                            <a href="{% url 'plant_update' plant.pk %}">Düzenle</a>
+                            <a href="{% url 'plant_delete' plant.pk %}">Sil</a>
+                        </td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div style="text-align: center; padding: 40px; color: #777;">
+            <p>Henüz kayıtlı bir bitki bulunmuyor.</p>
+        </div>
+    {% endif %}
+
+{% endblock %}

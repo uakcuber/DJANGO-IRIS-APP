@@ -1,0 +1,228 @@
+/* static/style.css - Modern Iris Theme */
+
+/* 1. DEĞİŞKENLER (Renk Yönetimi) */
+:root {
+    --primary-color: #673AB7; /* Derin Mor */
+    --primary-dark: #512DA8;
+    --accent-color: #009688; /* Teal Yeşili */
+    --bg-color: #f4f7f6;      /* Çok açık gri arkaplan */
+    --text-dark: #333333;
+    --text-light: #ffffff;
+    --danger: #e53935;
+    --success: #43A047;
+    --card-shadow: 0 10px 20px rgba(0,0,0,0.05), 0 6px 6px rgba(0,0,0,0.1);
+}
+
+/* 2. GENEL AYARLAR */
+body {
+    font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+    background-color: var(--bg-color);
+    margin: 0;
+    padding: 0;
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+/* 3. HEADER & NAVİGASYON */
+header {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    padding: 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 20px;
+}
+
+nav a {
+    color: rgba(255,255,255,0.9);
+    margin-right: 20px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 8px 12px;
+    border-radius: 4px;
+}
+
+nav a:hover {
+    color: white;
+    background-color: rgba(255,255,255,0.15);
+    transform: translateY(-2px);
+}
+
+/* Çıkış Butonu Özel Stil */
+nav button {
+    background: rgba(229, 57, 53, 0.2) !important;
+    color: #ffcccc !important;
+    padding: 6px 15px !important;
+    border: 1px solid rgba(229, 57, 53, 0.5) !important;
+}
+nav button:hover {
+    background: var(--danger) !important;
+    color: white !important;
+}
+
+/* 4. KONTEYNER (Kart Yapısı) */
+.container {
+    max-width: 1100px;
+    margin: 40px auto;
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+    min-height: 60vh; /* Sayfa boşsa bile dolu dursun */
+}
+
+h2 {
+    color: var(--primary-dark);
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+    margin-top: 0;
+}
+
+/* 5. TABLOLAR (Plant List) */
+table {
+    width: 100%;
+    border-collapse: separate; 
+    border-spacing: 0;
+    margin-top: 20px;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0,0,0,0.02);
+}
+
+thead {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+th { font-weight: 600; letter-spacing: 0.5px; }
+
+tr:last-child td { border-bottom: none; }
+
+tr:nth-child(even) { background-color: #fcfcfc; }
+
+tr:hover {
+    
+    background-color: rgba(103, 58, 183, 0.08); 
+    transition: background-color 0.2s ease;
+}
+
+/* 6. BUTONLAR VE LİNKLER */
+button, .btn {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s;
+}
+
+button:hover, .btn:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* Tablo içindeki Düzenle/Sil linkleri */
+td a {
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+td a[href*="update"] { color: var(--primary-color); background: rgba(103, 58, 183, 0.1); }
+td a[href*="delete"] { color: var(--danger); background: rgba(229, 57, 53, 0.1); }
+td a:hover { text-decoration: none; opacity: 0.8; }
+
+/* 7. FORMLAR */
+input[type="text"], input[type="number"], input[type="password"], input[type="email"], select, textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0 20px 0;
+    display: inline-block;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    background-color: #fafafa;
+}
+
+label {
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* 8. MESAJ KUTULARI (Alerts) */
+.messages { list-style: none; padding: 0; }
+.messages li {
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+}
+.messages .success {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    border-left: 5px solid #2e7d32;
+}
+.messages .error {
+    background-color: #ffebee;
+    color: #c62828;
+    border-left: 5px solid #c62828;
+}
+
+/* 9. FOOTER */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #333;
+    color: #888;
+    font-size: 0.9rem;
+    margin-top: auto; /* Sayfanın en altına itmek için */
+}
+
+/* ML Sayfası Özel Progress Bar Arkaplanı */
+.progress-bg {
+    background-color: #eee;
+    border-radius: 10px;
+    height: 20px;
+    width: 100%;
+    overflow: hidden;
+    margin-top: 5px;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+}
