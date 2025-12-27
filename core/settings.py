@@ -132,3 +132,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # core/settings.py en altı
 LOGIN_REDIRECT_URL = 'plant_list'  # Giriş yapınca anasayfaya git
 LOGOUT_REDIRECT_URL = 'login'      # Çıkış yapınca login sayfasına git
+LOGIN_URL = 'login'  # Oturum açılmamışsa yönlendirilecek login url
