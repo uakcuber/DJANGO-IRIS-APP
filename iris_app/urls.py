@@ -3,7 +3,7 @@ from django.contrib.auth import views as auth_views  # <-- BU SATIR ÇOK ÖNEML�
 from rest_framework.routers import DefaultRouter
 from . import views
 
-# API Router ayarı (Bonus Puan İçin)
+# API Router ayarı
 router = DefaultRouter()
 router.register(r'api/plants', views.IrisPlantViewSet)
 
@@ -30,12 +30,8 @@ path('password-reset/', views.username_password_reset, name='password_reset'),
          auth_views.PasswordResetCompleteView.as_view(template_name='registration/password_reset_complete.html'),
          name='password_reset_complete'),
 
-    # HATA VEREN KISIM DÜZELTİLDİ:
-    # Artık views.auth_views değil, direkt auth_views kullanıyoruz.
     path('login/', auth_views.LoginView.as_view(), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('predict/', views.predict_species, name='predict_species'),
-
-    # BONUS API URL'i:
     path('', include(router.urls)),
 ]

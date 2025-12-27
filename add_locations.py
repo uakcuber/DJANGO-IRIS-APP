@@ -25,8 +25,8 @@ for loc in locations_data:
         }
     )
     if created:
-        print(f"✅ Eklendi: {location.city}")
+        print(f"Eklendi: {location.city}")
     else:
-        print(f"⚠️  Zaten var: {location.city}")
+        print(f"Zaten var: {location.city}")
 
-print("\n✅ Tamamlandı!")
+print("\nTamamlandı!")

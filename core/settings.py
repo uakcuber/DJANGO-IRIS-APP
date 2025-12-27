@@ -30,7 +30,6 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
-# core/settings.py içinde
 
 INSTALLED_APPS = [
     'django.contrib.admin',

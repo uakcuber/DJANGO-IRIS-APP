@@ -1,34 +1,22 @@
-# iris_app/views.py
 
-# 1. Standart Kütüphaneler
-import csv
-import io
-
-# 2. Django Çekirdek Modülleri
+import csv  # CSV işlemleri için
+import io   # Dosya okuma için
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
-
-# 3. Rest Framework (API)
 from rest_framework import viewsets
-
-# 4. Scikit-Learn (Yapay Zeka)
 from sklearn.datasets import load_iris
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.linear_model import LogisticRegression
-
-# 5. Kendi Uygulamanızın Dosyaları
 from .models import IrisPlant, Location
 from .forms import IrisPlantForm
 from .decorators import writer_required
-# Eğer serializers.py dosyan yoksa bu satır hata verir, aşağıda onu da vereceğim.
-from .serializers import IrisPlantSerializer 
+from .serializers import IrisPlantSerializer
 from django.contrib.auth.models import User
-from django.contrib.auth.hashers import make_password
 from .username_password_reset_form import UsernamePasswordResetForm
 import random
 import string
@@ -55,11 +43,11 @@ def username_password_reset(request):
         form = UsernamePasswordResetForm()
     return render(request, 'registration/password_reset.html', {'form': form, 'new_password': new_password, 'username': username})
 
-# --- IMPORT / EXPORT ---
+# import export
 @writer_required
 def data_import_export(request):
     if request.method == "POST":
-        # --- EXPORT İŞLEMİ ---
+        # export
         if 'export_data' in request.POST:
             response = HttpResponse(content_type='text/csv')
             response['Content-Disposition'] = 'attachment; filename="iris_plants.csv"'
@@ -80,7 +68,7 @@ def data_import_export(request):
                 ])
             return response
 
-        # --- IMPORT İŞLEMİ ---
+        # import
         elif 'import_data' in request.POST:
             csv_file = request.FILES.get('csv_file')
 
@@ -122,7 +110,7 @@ def data_import_export(request):
 
     return render(request, 'import_export.html')
 
-# --- KULLANICI İŞLEMLERİ ---
+# user
 def register(request):
     if request.method == "POST":
         form = UserCreationForm(request.POST)
@@ -134,7 +122,7 @@ def register(request):
         form = UserCreationForm()
     return render(request, 'registration/register.html', {'form': form})
 
-# --- CRUD İŞLEMLERİ ---
+# crud
 @login_required
 def plant_list(request):
     plants = IrisPlant.objects.all().order_by('-created_at')
@@ -176,7 +164,7 @@ def plant_delete(request, pk):
         return redirect('plant_list')
     return render(request, 'plant_confirm_delete.html', {'plant': plant})
 
-# --- ARAMA ---
+# search
 @login_required
 def plant_search(request):
     plants = IrisPlant.objects.all().order_by('-created_at')
@@ -195,12 +183,12 @@ def plant_search(request):
     context = {'plants': plants}
     return render(request, 'plant_search.html', context)
 
-# --- BONUS: API VIEWSET ---
+# api eklendi
 class IrisPlantViewSet(viewsets.ModelViewSet):
     queryset = IrisPlant.objects.all()
     serializer_class = IrisPlantSerializer
 
-# --- BONUS: YAPAY ZEKA TAHMİNİ ---
+# machine learning eklendi
 @login_required
 def predict_species(request):
     prediction = None

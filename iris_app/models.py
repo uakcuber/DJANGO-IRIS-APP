@@ -1,7 +1,7 @@
 from django.db import models
 
 
-# Ödev Gereksinimi: User harici ikinci model
+
 class Location(models.Model):
     city = models.CharField(max_length=100, verbose_name="Şehir")
     # Region ve Altitude alanlarını eklemişsin, gayet güzel (Bonus puan getirebilir)
@@ -16,10 +16,8 @@ class Location(models.Model):
         return self.city
 
 
-# Ödev Gereksinimi: Ana veri modeli (Iris Dataset)
+
 class IrisPlant(models.Model):
-    # İlişkisel Model Gereksinimi (Many-to-One)
-    # DÜZELTME: on_delete=models.SET_NULL yaptık. Şehir silinirse bitki silinmesin, konumu boşalsın.
     location = models.ForeignKey(Location, on_delete=models.SET_NULL, related_name='plants', verbose_name="Konum",
                                  null=True, blank=True)
 
@@ -29,7 +27,6 @@ class IrisPlant(models.Model):
     petal_length = models.FloatField(verbose_name="Petal Length (cm)")
     petal_width = models.FloatField(verbose_name="Petal Width (cm)")
 
-    # DÜZELTME: choices'ı kaldırdık. CSV yüklerken harf hatası olursa patlamasın diye.
     species = models.CharField(max_length=50, verbose_name="Tür")
 
     created_at = models.DateTimeField(auto_now_add=True)
