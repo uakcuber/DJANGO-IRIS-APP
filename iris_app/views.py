@@ -27,6 +27,33 @@ from .forms import IrisPlantForm
 from .decorators import writer_required
 # Eğer serializers.py dosyan yoksa bu satır hata verir, aşağıda onu da vereceğim.
 from .serializers import IrisPlantSerializer 
+from django.contrib.auth.models import User
+from django.contrib.auth.hashers import make_password
+from .username_password_reset_form import UsernamePasswordResetForm
+import random
+import string
+def username_password_reset(request):
+    new_password = None
+    username = None
+    if request.method == 'POST':
+        form = UsernamePasswordResetForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            try:
+                user = User.objects.get(username=username)
+                # Yeni şifre oluştur
+                new_password = ''.join(random.choices(string.ascii_letters + string.digits, k=8))
+                user.set_password(new_password)
+                user.save()
+                print("\n" + "*"*60)
+                print(f"[Şifre Sıfırlandı] Kullanıcı: {username} | Yeni Şifre: {new_password}")
+                print("*"*60 + "\n")
+                messages.success(request, f"Yeni şifreniz terminalde gösterildi. Kullanıcı adınız: {username}")
+            except User.DoesNotExist:
+                messages.error(request, "Böyle bir kullanıcı bulunamadı.")
+    else:
+        form = UsernamePasswordResetForm()
+    return render(request, 'registration/password_reset.html', {'form': form, 'new_password': new_password, 'username': username})
 
 # --- IMPORT / EXPORT ---
 @writer_required
