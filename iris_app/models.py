@@ -1,10 +1,7 @@
 from django.db import models
-
-
-
 class Location(models.Model):
     city = models.CharField(max_length=100, verbose_name="Şehir")
-    # Region ve Altitude alanlarını eklemişsin, gayet güzel (Bonus puan getirebilir)
+    # Region ve Altitude alanlarını eklemişsin, gayet güzel
     region = models.CharField(max_length=100, verbose_name="Bölge", blank=True, null=True)
     altitude = models.IntegerField(verbose_name="Rakım (m)", default=0)
     created_at = models.DateTimeField(auto_now_add=True)

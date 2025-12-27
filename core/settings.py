@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'iris_app', # ekledik
+    'iris_app',
     'rest_framework',
 ]
 

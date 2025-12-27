@@ -15,12 +15,5 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'core.settings')
 
 application = get_wsgi_application()
 
-# Bind the application to a specific host and port
-host = '0.0.0.0'
-port = '8000'
-bind = f'{host}:{port}'
+# bind ediyoruz portu ve hostu
 
-# Start the server
-if __name__ == '__main__':
-    from waitress import serve
-    serve(application, host=host, port=port)

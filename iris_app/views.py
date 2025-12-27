@@ -20,6 +20,8 @@ from django.contrib.auth.models import User
 from .username_password_reset_form import UsernamePasswordResetForm
 import random
 import string
+
+# importlar yapıldı
 def username_password_reset(request):
     new_password = None
     username = None

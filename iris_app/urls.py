@@ -1,5 +1,5 @@
 from django.urls import path, include
-from django.contrib.auth import views as auth_views  # <-- BU SATIR ÇOK ÖNEMLİ
+from django.contrib.auth import views as auth_views
 from rest_framework.routers import DefaultRouter
 from . import views
 
