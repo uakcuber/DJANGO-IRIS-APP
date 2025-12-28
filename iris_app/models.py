@@ -1,4 +1,6 @@
 from django.db import models
+
+# MODEL TANIMLARI BURADA
 class Location(models.Model):
     city = models.CharField(max_length=100, verbose_name="Şehir")
     # Region ve Altitude alanlarını eklemişsin, gayet güzel

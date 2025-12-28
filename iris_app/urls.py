@@ -6,7 +6,7 @@ from . import views
 # API Router ayarı
 router = DefaultRouter()
 router.register(r'api/plants', views.IrisPlantViewSet)
-
+# pathler burada
 urlpatterns = [
     # Mevcut Sayfalar
     path('', views.plant_list, name='plant_list'),
